@@ -6,9 +6,9 @@ alles, was er/sie wissen muss. Üblicherweise sollte der Kommentar
 zumindest die folgenden Angaben umfassen:
 ------------------------------------------------------------------------
 
-PROJEKTBEZEICHNUNG:
-PROJEKTZWECK:
+PROJEKTBEZEICHNUNG: Bouncy Balls
+PROJEKTZWECK: Öhhm springende Bälle auf einer Platte
 VERSION oder DATUM:
-WIE IST DAS PROJEKT ZU STARTEN:
-AUTOR(EN):
+WIE IST DAS PROJEKT ZU STARTEN: ein neues Objekt von Umgebung erzeugen
+AUTOR(EN): Lasse Fischer
 BENUTZERHINWEISE:
