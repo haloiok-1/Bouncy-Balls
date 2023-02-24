@@ -3,8 +3,12 @@ import java.util.Random;
 
 public class Umgebung extends Thread{
     Ball einBall;
+    Empore hauptPilz;
 
     GLZylinder boden;
+    GLZylinder stiel;
+    GLTafel ballCounter;
+
     GLTastatur tastatur;
     GLNebel nebel;
 
@@ -13,20 +17,39 @@ public class Umgebung extends Thread{
     GLEntwicklerkamera meineKamera;
 
     boolean loopcutter = true;
+    int ballsAmount = 0;
     public Umgebung(){
         meinLicht = new GLLicht();
+        meinLicht.setzeFarbe(100, 100, 25);
+        
+        tastatur = new GLTastatur();
         nebel = new GLNebel();
         nebel.setzeFarbe(0, 0, 0);
 
-        boden = new GLZylinder(0, -6, 0, 100, 10);
-        boden.drehe(90, 0, 0);
+        // erstelle Pilz auf dem die Kugeln hüpfen
+        hauptPilz = new Empore(0, -13, 0, 250, "roterPilz.png");
 
-        tastatur = new GLTastatur();
+        
+        
+        //Pilzwald erstellen
+        pilzeErstellen("roterPilz.png");
+        pilzeErstellen("gruenerPilz.png");
+        pilzeErstellen("gelberPilz.png");
+        pilzeErstellen("blauerPilz.png");
+        pilzeErstellen("violetterPilz.png");
+        
+        ballCounter = new GLTafel(150, -25, 0, 50, 50);
+        ballCounter.setzeTextur("transparent.png");    
+        ballCounter.setzeText("Balls that lived: " + ballsAmount , 10);
+        ballCounter.dreheDich(90, 90, 0);
+        
 
-        System.out.println("start loop");
+        System.out.println("Starting Programm");
         meineKamera = new GLEntwicklerkamera();
         meineKamera.setzePosition(500, 500, 500);
         meineKamera.setzeBlickpunkt(0, -5, 0);
+
+        
         run();
 
         /* while(loopcutter){
@@ -51,8 +74,10 @@ public class Umgebung extends Thread{
             if(loopcutter){
                 Ball kugel = new Ball(getRandomNumberUsingNextInt(-10, 10), 300 , getRandomNumberUsingNextInt(-10, 10));
                 kugel.start();
+                ballsAmount++;
+                ballCounter.setzeText("Balls that lived: " + ballsAmount , 10);
             }
-            
+
             if(tastatur.enter()){
                 if(loopcutter){
                     loopcutter = false;
@@ -79,4 +104,12 @@ public class Umgebung extends Thread{
         return random.nextInt(max - min) + min;
     }
 
+    public void pilzeErstellen(String textur){
+        for(int i = 0; i <= 5; i++){
+
+            Empore empore = new Empore(getRandomNumberUsingNextInt(-2000, 2000),getRandomNumberUsingNextInt(-500, -100), getRandomNumberUsingNextInt(-2000, 2000), getRandomNumberUsingNextInt(50, 200), textur);
+
+        }
+
+    }
 }

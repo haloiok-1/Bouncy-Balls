@@ -12,13 +12,10 @@ class Ball extends Thread{
     double gravitation;
     int ballsize;
     double verformung;
-    double transformingSpeed = 2;
-    
+    double transformingSpeed = 3;
 
     public Ball(int x, int y, int z){
-
         super();
-
         ballsize = 10;
         verformung = 1.05;
         ortsVektor = new GLVektor(x, y, z);
@@ -27,20 +24,18 @@ class Ball extends Thread{
         kugel = new GLKugel(ortsVektor, ballsize);
         gravitation = 0.9;
     }
-    
-    
+
     public void run(){
         //kugel.setzeFarbe(getRandomNumberUsingNextInt(100, 255), getRandomNumberUsingNextInt(100, 255), getRandomNumberUsingNextInt(100, 255));
-        
+
         while(true){
             ortsVektor.addiere(richtungsVektor);
             kugel.setzePosition(ortsVektor);
 
             if(ortsVektor.y < ballsize ){
-                
-                
+
                 // wird ausgeführt, wenn Kugel über den Rand hinaus geht. -> fällt dann runter
-                if(Math.sqrt(Math.pow(ortsVektor.x, 2) + Math.pow(ortsVektor.z, 2)) > 100 + ballsize/4){
+                if(Math.sqrt(Math.pow(ortsVektor.x, 2) + Math.pow(ortsVektor.z, 2)) > 250 + ballsize/4){
                     falling = true;
                     System.out.println("Thread " + this.currentThread().getId() + " is falling!");
 
@@ -54,7 +49,7 @@ class Ball extends Thread{
 
                     }
                 }
-                
+
                 // wird ausgeführt, wenn die Kugel sich langsamer bewegt als 0.5 und sie den boden berührt -> stoppt alles
                 else if(Math.abs(richtungsVektor.y) <= 0.5){
                     ortsVektor.y = ballsize - 0.5;
@@ -71,23 +66,19 @@ class Ball extends Thread{
                     if(ortsVektor.y < ballsize-2){
                         System.out.println(ortsVektor.y);
                         ortsVektor.y = ballsize-0.5;
-                                            }
-                    
-                    
+                    }
+
                     //ermöglicht das abprallen am boden
                     richtungsVektor.y = -richtungsVektor.y;
                     richtungsVektor.y /= verformung;
-                    
+
                     //verlangsamt x und z richtung prozentual
-                    
-                    
-                
+                    richtungsVektor.x /= 1.005;
+                    richtungsVektor.z /= 1.005;                
                 }
             }
 
             if(!laying){addiereGravitation();}
-            richtungsVektor.x /= 1.005;
-            richtungsVektor.z /= 1.005;
             
             if(Thread.currentThread().isInterrupted()) {
                 break;
@@ -100,7 +91,6 @@ class Ball extends Thread{
 
             }
 
-            
         }
     }
 
@@ -113,7 +103,6 @@ class Ball extends Thread{
         richtungsVektor.y -= gravitation;
     }
 
-    
     public int getRandomNumberUsingNextInt(int min, int max) {
         if(max <= min) return min + 1;
 
