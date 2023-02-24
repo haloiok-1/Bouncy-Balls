@@ -22,7 +22,7 @@ class Ball extends Thread{
         richtungsVektor = new  GLVektor(getRandomNumberUsingNextDouble(-transformingSpeed, transformingSpeed), 10, getRandomNumberUsingNextDouble(-transformingSpeed, transformingSpeed));
 
         kugel = new GLKugel(ortsVektor, ballsize);
-        gravitation = 0.9;
+        gravitation = 1;
     }
 
     public void run(){

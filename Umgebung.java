@@ -15,21 +15,21 @@ public class Umgebung extends Thread{
     double gravitation = 9.81;
     GLLicht meinLicht;
     GLEntwicklerkamera meineKamera;
+    FlyingCamera kamera1;
 
     boolean loopcutter = true;
     int ballsAmount = 0;
     public Umgebung(){
         meinLicht = new GLLicht();
         meinLicht.setzeFarbe(100, 100, 25);
-        
+
         tastatur = new GLTastatur();
         nebel = new GLNebel();
-        nebel.setzeFarbe(0, 0, 0);
+        nebel.setzeFarbe(0, 0.1, 0.05);
 
         // erstelle Pilz auf dem die Kugeln hüpfen
         hauptPilz = new Empore(0, -13, 0, 250, "roterPilz.png");
 
-        
         
         //Pilzwald erstellen
         pilzeErstellen("roterPilz.png");
@@ -37,21 +37,20 @@ public class Umgebung extends Thread{
         pilzeErstellen("gelberPilz.png");
         pilzeErstellen("blauerPilz.png");
         pilzeErstellen("violetterPilz.png");
-        
-        ballCounter = new GLTafel(150, -25, 0, 50, 50);
+
+        ballCounter = new GLTafel(160, -25, 0, 50, 50);
         ballCounter.setzeTextur("transparent.png");    
         ballCounter.setzeText("Balls that lived: " + ballsAmount , 10);
         ballCounter.dreheDich(90, 90, 0);
-        
 
         System.out.println("Starting Programm");
         meineKamera = new GLEntwicklerkamera();
         meineKamera.setzePosition(500, 500, 500);
         meineKamera.setzeBlickpunkt(0, -5, 0);
 
-        
-        run();
+        //kamera1 = new FlyingCamera();
 
+        run();
         /* while(loopcutter){
         if(tastatur.oben()){
 
@@ -72,7 +71,7 @@ public class Umgebung extends Thread{
     public void run(){
         while(true){  
             if(loopcutter){
-                Ball kugel = new Ball(getRandomNumberUsingNextInt(-10, 10), 300 , getRandomNumberUsingNextInt(-10, 10));
+                Ball kugel = new Ball(getRandomNumberUsingNextInt(-10, 10), 400 , getRandomNumberUsingNextInt(-10, 10));
                 kugel.start();
                 ballsAmount++;
                 ballCounter.setzeText("Balls that lived: " + ballsAmount , 10);
@@ -105,9 +104,9 @@ public class Umgebung extends Thread{
     }
 
     public void pilzeErstellen(String textur){
-        for(int i = 0; i <= 5; i++){
+        for(int i = 0; i <= 1; i++){
 
-            Empore empore = new Empore(getRandomNumberUsingNextInt(-2000, 2000),getRandomNumberUsingNextInt(-500, -100), getRandomNumberUsingNextInt(-2000, 2000), getRandomNumberUsingNextInt(50, 200), textur);
+            Empore empore = new Empore(getRandomNumberUsingNextInt(-2000, 2000),getRandomNumberUsingNextInt(-500, -100), getRandomNumberUsingNextInt(-2000, 2000), getRandomNumberUsingNextInt(20, 200), textur);
 
         }
 
