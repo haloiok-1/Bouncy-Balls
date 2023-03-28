@@ -19,7 +19,11 @@ class Ball extends Thread{
         ballsize = 10;
         verformung = 1.05;
         ortsVektor = new GLVektor(x, y, z);
-        richtungsVektor = new  GLVektor(getRandomNumberUsingNextDouble(-transformingSpeed, transformingSpeed), 10, getRandomNumberUsingNextDouble(-transformingSpeed, transformingSpeed));
+        richtungsVektor = new  GLVektor(
+            getRandomNumberUsingNextDouble(-transformingSpeed, transformingSpeed),
+            10,
+            getRandomNumberUsingNextDouble(-transformingSpeed, transformingSpeed)
+        );
 
         kugel = new GLKugel(ortsVektor, ballsize);
         gravitation = 1;
